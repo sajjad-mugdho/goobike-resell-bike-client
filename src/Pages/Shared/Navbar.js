@@ -1,15 +1,18 @@
-import React from 'react';
+
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import navbg from '../../assest/image/navbg.jpg';
+
 import PrimaryBtn from '../../Component/PrimeryBtn/PrimaryBtn';
+import { AuthContext } from '../../Context/AuthProvider';
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext)
 
     const menuItem = <>
         <li><Link to={'/'}>Home</Link></li>
-        <li><Link to={'/'}>Login</Link></li>
         <li><Link to={'/'}>Dashboard</Link></li>
-    <li><Link to={'/'}>Shop</Link></li>
+        <li><Link to={'/'}>Shop</Link></li>
+
     </>
     return (
         <div className="navbar glass" >
@@ -30,7 +33,19 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-              <PrimaryBtn>Get Started</PrimaryBtn>  
+                {
+                    user?.email ?
+                        <div className="avatar dropdown dropdown-hover dropdown-end">
+                            <div className="w-12 mr-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img src={user?.photoURL} alt="" />
+                                <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-32">
+                                    <li><Link to={'/profile'}>Profile</Link></li>
+                                    <li onClick={logout}><Link>Sign Out</Link></li>
+                                </ul>
+                            </div>
+                        </div> : <Link to={"/login"}><PrimaryBtn>Login</PrimaryBtn></Link>
+                }
+
             </div>
         </div>
     );
