@@ -1,14 +1,18 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { setAuthToken } from '../../Api/Auth';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const SignUp = () => {
 
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { user, createUser, updateUserProfile, loading,
+        setLoading,
+        signInWithGoogle, } = useContext(AuthContext)
 
-    // const navigate = useNavigate();
-    // const location = location.state?.from?.pathname || '/';
+    const navigate = useNavigate();
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
 
 
     const handleSubmit = e => {
@@ -36,22 +40,77 @@ const SignUp = () => {
             createUser(email, password).then(result => {
 
                 console.log(result);
+                setAuthToken(result.user)
 
                 updateUserProfile(name, imageData.data.display_url).then(data => {
                     console.log(data);
+
+                    const userData = {
+                        email: email,
+                        name: name,
+                        img: imageData.data.display_url,
+                        role: role,
+
+                    }
+                    console.log(userData);
+
+                    saveUser(userData)
+                        .then(data => console.log(data))
+                        .catch(err => console.log(err))
                     toast.success("User Created Successfully")
-                })
+                }).then(result => {
+                    setLoading(false)
+                    navigate(from, { replace: true })
+                }).catch()
 
-            }).catch(err => console.error(err))
 
-        }).catch(err => console.error(err))
+            }).catch(err => {
+                console.error(err)
+                setLoading(false)
+                toast.error(err.message)
+            })
+
+        }).catch(err => {
+            console.log(err)
+        })
+    };
+
+    const handleGoogleLogin = () => {
+        signInWithGoogle().then(result => {
+            const user = result.user;
+            console.log(user);
+            setAuthToken(result.user)
+            toast.success("User Created Successfully")
+            navigate(from, { replace: true })
+        }).catch(err => {
+            console.error(err)
+            setLoading(false)
+            toast.error(err.message)
+        })
+    }
+
+    const saveUser = async userData => {
+        const url = `http://localhost:5000/user/${userData?.email}`
+
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+
+        const data = await response.json()
+
+        return data
     }
 
 
 
+
     return (
-        <div className='flex justify-center items-center'>
-            <div className='w-96 p-7'>
+        <div className=' my-20 flex justify-center items-center'>
+            <div className='w-96 p-7 shadow-xl'>
                 <h2 className='text-xl text-center'>Sign-Up</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-control w-full max-w-xs">
@@ -88,7 +147,7 @@ const SignUp = () => {
                 </form>
                 <p>Already have an Account <Link className='text-secondary' to="/login">Login Now</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleLogin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
 

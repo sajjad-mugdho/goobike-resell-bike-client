@@ -5,7 +5,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 const Login = () => {
 
-    const { signin } = useContext(AuthContext)
+    const { signin , signInWithGoogle, setLoading} = useContext(AuthContext)
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -22,10 +22,21 @@ const Login = () => {
             toast.error(err.message)
         })
     }
+    const handleGoogleLogin = () => {
+        signInWithGoogle().then(result => {
+            const user = result.user;
+            console.log(user);
+            toast.success("User Created Successfully")
+        }).catch(err => {
+            console.error(err)
+            setLoading(false)
+            toast.error(err.message)
+        })
+    }
 
     return (
-        <div className='h-[500px] flex justify-center items-center'>
-            <div className='w-96 p-7'>
+        <div className='h-[600px] my-20 flex justify-center items-center '>
+            <div className='w-96 p-7 shadow-xl'>
                 <h2 className='text-xl text-center'>Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-control w-full max-w-xs">
@@ -45,7 +56,7 @@ const Login = () => {
                 </form>
                 <p>New to GooBike? <Link className='text-secondary' to="/signup">Create new Account</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleLogin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
 
