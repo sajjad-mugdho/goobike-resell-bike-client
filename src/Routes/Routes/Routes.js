@@ -3,6 +3,7 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/Dashboard/AddProduct";
+import ManageBikes from "../../Pages/Dashboard/ManageBikes";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/Login/SignUp";
@@ -13,66 +14,68 @@ import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
-    {
+  {
+    path: '/',
+    element: <Main></Main>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
         path: '/',
-        element: <Main></Main>,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                path: '/',
-                element: <Home></Home>,
+        element: <Home></Home>,
 
-            },
-            {
-                path: '/login',
-                element: <Login></Login>
-            },
-            {
-                path: '/signup',
-                element: <SignUp></SignUp>
-            },
-            {
-                path: '/profile',
-                element: <Profile></Profile>
-            },
-        ]
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/signup',
+        element: <SignUp></SignUp>
+      },
+      {
+        path: '/profile',
+        element: <Profile></Profile>
+      },
+    ]
 
 
-    },
-    {
-        path: '/dashboard',
-        errorElement: <ErrorPage />,
+  },
+  {
+    path: '/dashboard',
+    errorElement: <ErrorPage />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+
+    ),
+    children: [
+      {
+        path: '',
         element: (
-            <PrivateRoute>
-                <DashboardLayout />
-            </PrivateRoute>
+          <PrivateRoute>
+            <Welcome />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'add-product',
+        element: (
+          <PrivateRoute>
+            <AddProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'manage-product',
+        element: (
+
+          <PrivateRoute>
+            <ManageBikes />
+          </PrivateRoute>
 
         ),
-        children: [
-            {
-                path: '',
-                element: (
-                  <PrivateRoute>
-                    <Welcome />
-                  </PrivateRoute>
-                ),
-              },
-              {
-                path: 'add-product',
-                element: (
-                  <PrivateRoute>
-                    <AddProduct />
-                  </PrivateRoute>
-                ),
-              },
-            //   {
-            //     path: 'manage-homes',
-            //     element: (
-            //       <HostRoute>
-            //         <ManageHomes />
-            //       </HostRoute>
-            //     ),
-            //   },
-        ]
-    }
+      },
+    ]
+  }
 ])

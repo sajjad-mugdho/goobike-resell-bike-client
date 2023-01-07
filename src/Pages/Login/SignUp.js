@@ -26,13 +26,15 @@ const SignUp = () => {
         const password = form.password.value;
         console.log("Name:", name, "Email:", email, "Pass:", password, "Image:", image, "role:", role);
 
-        const formData = new FormData()
-        formData.append('image', image)
+        const formData = new FormData();
+        formData.append('image', image);
+
         const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`
 
         fetch(url, {
             method: 'POST',
             body: formData,
+            
         }).then(res => res.json()).then(imageData => {
 
             console.log("Image:", imageData);
