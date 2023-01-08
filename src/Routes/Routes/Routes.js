@@ -10,6 +10,7 @@ import SignUp from "../../Pages/Login/SignUp";
 import ErrorPage from "../../Pages/Shared/ErrorPage";
 import Profile from "../../Pages/Shared/Profile";
 import Welcome from "../../Pages/Shared/Welcome";
+import Shop from "../../Pages/Shop/Shop";
 import PrivateRoute from "./PrivateRoute";
 
 
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: '/profile',
         element: <Profile></Profile>
+      },
+      {
+        path: '/shop',
+        element:<Shop/>
       },
     ]
 

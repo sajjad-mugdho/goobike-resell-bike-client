@@ -72,23 +72,19 @@ const Sidebar = () => {
                             {
                                 user?.role === "admin" ? <AdminMenu /> : <>{user?.role !== "Buyer" ? <Sellermenu /> : <BuyerMenu></BuyerMenu>}</>
                             }
-                            {/* {user?.role && user?.role !== 'Buyer' ? (
-                                <>{user?.role === 'admin' ? <AdminMenu /> : <Sellermenu />} </>
-                            ) : (
-                                <BuyerMenu />
-                            )} */}
+                        
                         </nav>
                     </div>
                 </div>
 
                 <div>
                     <hr />
-                    <PrimaryBtn handler={logout} classes='flex block w-full rounded-full items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform'>
+                    <button onClick={logout} className='flex block btn btn-primary w-full rounded-full items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform'>
 
                         <ArrowRightOnRectangleIcon className='w-5 h-5' />
 
                         <span className='mx-4 font-medium'>Logout</span>
-                    </PrimaryBtn>
+                    </button>
 
 
                 </div>

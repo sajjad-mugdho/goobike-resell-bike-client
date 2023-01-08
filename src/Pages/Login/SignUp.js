@@ -34,7 +34,7 @@ const SignUp = () => {
         fetch(url, {
             method: 'POST',
             body: formData,
-            
+
         }).then(res => res.json()).then(imageData => {
 
             console.log("Image:", imageData);
@@ -63,7 +63,10 @@ const SignUp = () => {
                 }).then(result => {
                     setLoading(false)
                     navigate(from, { replace: true })
-                }).catch()
+                }).catch(err => {
+                    console.log(err);
+                    toast.error(err.message)
+                })
 
 
             }).catch(err => {

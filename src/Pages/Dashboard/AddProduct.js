@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import SmallSpinner from '../../Component/Spinner/SmallSpinner';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const AddProduct = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { user, loading, setLoading } = useContext(AuthContext);
 
 
     const handleSubmit = e => {
@@ -18,6 +19,11 @@ const AddProduct = () => {
         const bikedetails = form.bikedetails.value;
         const category = form.category.value;
         const image = form.image.files[0]
+        const year = form.year.value;
+        const number = form.number.value;
+        const condition = form.condition.value;
+        const location = form.location.value;
+
 
 
         console.log(sellername, email, sellerimage, bikename, bikedetails, image, category);
@@ -32,22 +38,30 @@ const AddProduct = () => {
             method: 'POST',
             body: formData,
         }).then(res => res.json()).then(imageData => {
+            
 
             console.log("image:", imageData);
             const sellerData = {
                 name: sellername,
                 email: email,
                 avater: sellerimage,
-                bike: bikename,
+                bike_name: bikename,
                 price: price,
                 details: bikedetails,
                 bikeimage: imageData.data.display_url,
+                category: category,
+                condition: condition,
+                year: year,
+                number: number,
+                location: location,
 
             }
 
             saveBike(sellerData).then(data => {
                 console.log(data);
                 toast.success("Bike Added")
+                form.rest()
+                setLoading(false)
             })
                 .catch(err => console.log(err))
 
@@ -88,6 +102,14 @@ const AddProduct = () => {
                             <input type="email" value={user?.email} disabled className="input input-bordered w-full " placeholder='Email' name="email" id="" />
                         </div>
                         <div className="form-control w-full ">
+                            <label className="label"> <span className="label-text">Location</span></label>
+                            <input type="text" className="input input-bordered w-full " placeholder='Location' name="location" id="" />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label"> <span className="label-text">Contact Number</span></label>
+                            <input type="number" className="input input-bordered w-full " placeholder='Number' name="number" id="" />
+                        </div>
+                        <div className="form-control w-full ">
                             <label className="label"> <span className="label-text">Seller Image</span></label>
                             <input type="text" value={user?.photoURL} disabled className="input input-bordered w-full " placeholder='Image' name="sellerimage" id="" />
                         </div>
@@ -95,6 +117,10 @@ const AddProduct = () => {
                         <div className="form-control w-full ">
                             <label className="label"> <span className="label-text">Bike Name</span></label>
                             <input type="text" className="input input-bordered w-full " placeholder='Bike Name' name="bikename" id="" />
+                        </div>
+                        <div className="form-control w-full ">
+                            <label className="label"> <span className="label-text">Year Of Uses</span></label>
+                            <input type="text" className="input input-bordered w-full " placeholder='Years' name="year" id="" />
                         </div>
                         <div className="form-control w-full ">
                             <label className="label"> <span className="label-text">Details</span></label>
@@ -115,6 +141,16 @@ const AddProduct = () => {
                             </select>
                         </div>
                         <div className="form-control w-full ">
+                            <label className="label"> <span className="label-text">Bike Condition</span></label>
+                            <select name='condition' className="select select-secondary w-full ">
+
+                                <option className='hover:bg-primary' value="Excellent" >Excellent</option>
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+
+                            </select>
+                        </div>
+                        <div className="form-control w-full ">
                             <label className="label"> <span className="label-text">Price</span></label>
                             <input type="text" className="input input-bordered w-full " placeholder='Price' name="price" id="" />
                         </div>
@@ -123,7 +159,8 @@ const AddProduct = () => {
                             <input type="file" name='image' className="file-input w-full input-primary bg-primary my-5 max-w-xs" />
                         </div>
 
-                        <input className='btn btn-secondary w-full' value="Sign Up" type="submit" />
+                        
+                        <button className='btn btn-secondary w-full' type="submit"> { loading ? <SmallSpinner /> : 'Sign Up'}</button>
 
                     </form>
 
