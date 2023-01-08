@@ -1,3 +1,4 @@
+
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
 import Bike from '../../Component/Dashboard/Bike';
@@ -7,19 +8,20 @@ import { AuthContext } from '../../Context/AuthProvider';
 const ManageBikes = () => {
 
     const { user, loading } = useContext(AuthContext);
-    
+    const url = `http://localhost:5000/bikes?email=${user?.email}`;
 
-    const {bikes, setBikes} = useState([]);
+    const { data: bikes = [] } = useQuery({
+        queryKey: ['bikes'],
+        queryFn: async () => {
+            const res = await fetch(url,);
 
-    useEffect(() => {
-        const url = `http://localhost:5000/bikes?email=${user?.email}`
-        fetch(url).then(res => res.json()).then(data => {
-            console.log(data);
-            setBikes(data)
-        })
-    },[user?.email])
+            const data = await res.json();
+            return data;
+        }
+    })
 
-    
+
+
 
     if (loading) {
         return <Spinner></Spinner>
@@ -29,44 +31,54 @@ const ManageBikes = () => {
         <div className="overflow-x-auto w-full">
 
             <table className="table w-full">
-               
+
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Price</th>
+                        
+                        <th className='ml-3'>Bike</th>
+                        <th>Seller</th>
                         <th>Booked</th>
-                        <th>Paid {bikes.length}</th>
+                        <th>Booked</th>
+                        <th>Paid</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
-                    <tr>
-                        <td>
-                            <div className="flex items-center space-x-3">
-                                <div className="avatar">
-                                    <div className="mask mask-squircle w-12 h-12">
-                                        <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+
+                    {
+                        bikes.map((bike, i) => <tr className='hover' key={bike._id}>
+
+                            <td>
+                                <div className="flex items-center space-x-3">
+                                    <th>{i + 1}</th>
+                                    <div className="avatar">
+                                        <div className="mask mask-squircle w-24 h-24">
+                                            <img src={bike.bikeimage
+                                            } alt="Avatar Tailwind CSS Component" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="font-bold">{bike.bike}</div>
+                                        <div className="text-sm opacity-50">${bike.price}</div>
                                     </div>
                                 </div>
-                                <div>
-                                    <div className="font-bold">Hart Hagerty</div>
-                                    <div className="text-sm opacity-50">United States</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            Zemlak, Daniel and Leannon
-                            <br />
-                            <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                        </td>
-                        <td>Purple</td>
-                        <th>
-                            <button className="btn btn-ghost btn-xs">details</button>
-                        </th>
-                    </tr>
-                    
+                            </td>
+                            <td>
+                                {bike.name}
+                                <br />
+                                <span className="badge badge-ghost badge-sm">{bike.email}</span>
+                            </td>
+                            <td>Purple</td>
+                            <td>Purple</td>
+
+                            <th>
+                                <button className="btn btn-xs">Pay</button>
+                            </th>
+
+                        </tr>)
+                    }
+
                 </tbody>
-                
+
 
             </table>
         </div>
