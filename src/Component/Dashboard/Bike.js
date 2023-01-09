@@ -15,10 +15,14 @@ const Bike = ({bike}) => {
                     <div className="badge badge-info">{category}</div>
                     <div className="badge badge-warning">${price}</div>
                 </div>
-                <div>
-                    <button className='btn btn-primary text-white'>
-                        Details
+                <div className='flex my-5 justify-between'>
+                    <button className='btn btn-sm btn-primary text-white'>
+                        Mark For AD
                     </button>
+                    <button className='btn  btn-sm bg-red-500  text-white'>
+                        Delete
+                    </button>
+                    
                 </div>
             </div>
         </div>

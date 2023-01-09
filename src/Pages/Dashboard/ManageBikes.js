@@ -9,12 +9,12 @@ import { AuthContext } from '../../Context/AuthProvider';
 const ManageBikes = () => {
 
     const { user, loading } = useContext(AuthContext);
-    const url = `http://localhost:5000/bikes?email=${user?.email}`;
+    const url = `http://localhost:5000/bikes/${user?.email}`;
 
     const { data: bikes = [] } = useQuery({
-        queryKey: ['bikes'],
+        queryKey: ['bikes',  user?.email],
         queryFn: async () => {
-            const res = await fetch(url,);
+            const res = await fetch(url);
 
             const data = await res.json();
             return data;
@@ -28,10 +28,14 @@ const ManageBikes = () => {
         return <Spinner></Spinner>
     }
 
+    if(bikes){
+
+    }
+
     return (
-        <div className='my-5 mx-5 gap-10 grid md:grid-cols-1 lg:grid-cols-2' >
+        <div className='my-5 ml-5 gap-5 grid md:grid-cols-1 lg:grid-cols-2' >
             {
-                bikes.map(bike => <Bike key={bike.id} bike={bike} />)
+                bikes?.map(bike => <Bike key={bike.id} bike={bike} />)
             }
         </div>
     );

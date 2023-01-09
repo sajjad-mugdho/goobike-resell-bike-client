@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SmallSpinner from '../../Component/Spinner/SmallSpinner';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const AddProduct = () => {
     const { user, loading, setLoading } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
 
     const handleSubmit = e => {
@@ -23,6 +25,7 @@ const AddProduct = () => {
         const number = form.number.value;
         const condition = form.condition.value;
         const location = form.location.value;
+
 
 
 
@@ -54,6 +57,7 @@ const AddProduct = () => {
                 year: year,
                 number: number,
                 location: location,
+                status: "available"
 
             }
 
@@ -62,6 +66,7 @@ const AddProduct = () => {
                 toast.success("Bike Added")
                 form.rest()
                 setLoading(false)
+                navigate("/dashboard/manage-product")
             })
                 .catch(err => console.log(err))
 
@@ -160,7 +165,7 @@ const AddProduct = () => {
                         </div>
 
                         
-                        <button className='btn btn-secondary w-full' type="submit"> { loading ? <SmallSpinner /> : 'Sign Up'}</button>
+                        <button className='btn btn-secondary w-full' type="submit"> { loading ? <SmallSpinner /> : 'Add Bike'}</button>
 
                     </form>
 

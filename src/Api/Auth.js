@@ -15,6 +15,6 @@ export const setAuthToken = user => {
       .then(data => {
         console.log(data)
         //Save token in LocalStorage
-        localStorage.setItem('aircnc-token', data.token)
+        localStorage.setItem('gooBike-token', data.token)
       })
   }
