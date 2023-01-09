@@ -4,6 +4,7 @@ import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/Dashboard/AddProduct";
 import ManageBikes from "../../Pages/Dashboard/ManageBikes";
+import CategoryByBike from "../../Pages/Home/Categorese/CategoryByBike";
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/Login/SignUp";
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
       {
         path: '/shop',
         element:<Shop/>
+      },
+      {
+        path: '/bike-category/:category',
+        element:<CategoryByBike></CategoryByBike>,
+        loader: ({params}) => fetch(`http://localhost:5000/bike/${params.category}`)
       },
     ]
 
