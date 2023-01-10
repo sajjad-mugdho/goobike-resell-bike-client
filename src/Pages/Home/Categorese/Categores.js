@@ -19,19 +19,19 @@ const Categores = () => {
     const bikeCategorese = [
         {
             id: 1,
-            category: "Adventure Bike",
+            category: "Adventure-Bike",
             img: "https://www.webbikeworld.com/wp-content/uploads/2019/11/5-6-750x500.jpg",
 
         },
         {
             id: 2,
-            category: "Cruiser Bike",
+            category: "Cruiser-Bike",
             img: "https://www.cycleworld.com/resizer/4-22qLmGnlZw5Q4FEu7S5UHtRPM=/arc-photo-octane/arc3-prod/public/4VOBT2GUKFAWVBZTTAYJWHKXYM.jpg",
 
         },
         {
             id: 3,
-            category: "Naked Bike",
+            category: "Naked-Bike",
             img: "https://cdn.visordown.com/field/image/ktm-125-duke-1.jpg",
 
         },
@@ -43,13 +43,13 @@ const Categores = () => {
         },
         {
             id: 5,
-            category: "Classic Bike",
+            category: "Classic-Bike",
             img: "https://www.wallpaperup.com/uploads/wallpapers/2012/08/05/8913/25cbc124868ee736a2dedf1e72e17091.jpg",
 
         },
         {
             id: 6,
-            category: "Scooter Bike",
+            category: "Scooter-Bike",
             img: "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2022/06/08/695745759.jpg",
 
         },
