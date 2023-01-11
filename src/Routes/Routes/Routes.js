@@ -1,19 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import BikeDetails from "../../Component/BikeDetails.js/BikeDetails";
-import BuyerMenu from "../../Component/Dashboard/BuyerMenu";
 import DashboardLayout from "../../Layout/DashboardLayout";
-
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/Dashboard/AddProduct";
 import Booking from "../../Pages/Dashboard/Booking";
 import ManageBikes from "../../Pages/Dashboard/ManageBikes";
-import CategoryByBike from "../../Pages/Home/Categorese/CategoryByBike";
+
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/Login/SignUp";
 import ErrorPage from "../../Pages/Shared/ErrorPage";
 import Profile from "../../Pages/Shared/Profile";
 import Welcome from "../../Pages/Shared/Welcome";
+import CategoryByBike from "../../Pages/Shop/Categoreis/CategoryByBike";
 import Shop from "../../Pages/Shop/Shop";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoutes";
@@ -102,7 +101,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'my-bookings',
-        element: <Booking/>
+        element: <Booking />
       }
     ]
   }

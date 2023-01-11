@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import BikeCard from './BikeCard';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../Context/AuthProvider';
+import BookingModal from '../../../Component/BookingModal/BookingModal';
 const Categores = () => {
 
     const { user, loading } = useContext(AuthContext);

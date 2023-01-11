@@ -32,7 +32,7 @@ const Navbar = () => {
                     {menuItem}
                 </ul>
             </div>
-            <div className="navbar-end">
+            <div className=" navbar-end ">
                 {
                     user?.email ?
                         <div className="avatar dropdown dropdown-hover dropdown-end">

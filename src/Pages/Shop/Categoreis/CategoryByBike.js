@@ -11,7 +11,7 @@ const CategoryByBike = () => {
         <div className='flex flex-row'>
 
             <div className='basis-1/4 ' >
-                <div className="card w-96 mt-20 mx-5 bg-secondary-focus shadow-xl">
+                <div className="card sm:w-40 md:w-52 lg:w-96 mt-20 mx-5 bg-secondary-focus shadow-xl">
 
                     <div className="card-body">
                         <h2 className='text-2xl font-bold flex justify-center'>Bike Category</h2>
