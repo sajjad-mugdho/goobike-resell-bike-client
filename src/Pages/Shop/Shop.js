@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+
 import Bike from '../../Component/Dashboard/Bike';
 import Spinner from '../../Component/Spinner/Spinner';
 import { AuthContext } from '../../Context/AuthProvider';
+import ShopCard from './ShopCard';
 
 const Shop = () => {
 
     const { user, loading } = useContext(AuthContext);
+    
     const url = `http://localhost:5000/bikes?email=${user?.email}`;
 
     const { data: bikes = [] } = useQuery({
@@ -31,7 +34,7 @@ const Shop = () => {
             </div>
             <div className='my-5 mx-5 gap-10 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3' >
                 {
-                    bikes.map(bike => <Bike key={bike.id} bike={bike} />)
+                    bikes.map(bike => <ShopCard key={bike._id} bike={bike} />)
                 }
             </div>
         </>

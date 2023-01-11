@@ -1,4 +1,5 @@
 import { ArrowRightOnRectangleIcon, Bars3Icon } from '@heroicons/react/24/solid';
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
@@ -10,6 +11,19 @@ import Sellermenu from './Sellermenu';
 const Sidebar = () => {
     const { user, logout } = useContext(AuthContext)
     const [isActive, setActive] = useState('false')
+    const url = `http://localhost:5000/user/${user?.email}`
+
+    const { data } = useQuery({
+        queryKey: ["user"],
+        queryFn: async () => {
+            const res = await fetch(url);
+
+            const data = await res.json();
+            return data;
+        }
+    })
+
+    console.log("user:", data);
 
     // Sidebar Responsive Handler
     const handleToggle = () => {
@@ -22,6 +36,7 @@ const Sidebar = () => {
                 <div>
                     <div className='block cursor-pointer p-4 font-bold'>
                         <Link to='/'>GooBike</Link>
+
                     </div>
                 </div>
 
@@ -60,6 +75,7 @@ const Sidebar = () => {
                             <Link to='/dashboard'>
                                 <p className='mx-2 mt-1 text-sm font-medium text-gray-600  hover:underline'>
                                     {user?.email}
+
                                 </p>
                             </Link>
                         </div>
@@ -70,9 +86,12 @@ const Sidebar = () => {
                         <nav>
 
                             {
-                                user?.role === "admin" ? <AdminMenu /> : <>{user?.role !== "Buyer" ? <Sellermenu /> : <BuyerMenu></BuyerMenu>}</>
+                                data?.role === "admin" ? <AdminMenu /> :
+                                    <>
+                                        {data?.role !== "Seller" ? <BuyerMenu></BuyerMenu> : <Sellermenu />}
+                                    </>
                             }
-                        
+
                         </nav>
                     </div>
                 </div>

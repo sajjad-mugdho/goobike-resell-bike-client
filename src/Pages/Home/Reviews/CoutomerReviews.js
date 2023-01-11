@@ -34,7 +34,7 @@ const CoutomerReviews = () => {
             <h2 className='text-4xl font-bold my-10 text-center mx-auto'>Customer Review</h2>
             <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                 {
-                    reviews.map(review => <Review key={review.id} review={review}></Review>)
+                    reviews.map(review => <Review key={review._id} review={review}></Review>)
                 }
             </div>
         </section>

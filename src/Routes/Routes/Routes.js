@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import BikeDetails from "../../Component/BikeDetails.js/BikeDetails";
+import BuyerMenu from "../../Component/Dashboard/BuyerMenu";
 import DashboardLayout from "../../Layout/DashboardLayout";
 
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/Dashboard/AddProduct";
+import Booking from "../../Pages/Dashboard/Booking";
 import ManageBikes from "../../Pages/Dashboard/ManageBikes";
 import CategoryByBike from "../../Pages/Home/Categorese/CategoryByBike";
 import Home from "../../Pages/Home/Home";
@@ -13,6 +16,7 @@ import Profile from "../../Pages/Shared/Profile";
 import Welcome from "../../Pages/Shared/Welcome";
 import Shop from "../../Pages/Shop/Shop";
 import PrivateRoute from "./PrivateRoute";
+import SellerRoute from "./SellerRoutes";
 
 
 export const router = createBrowserRouter([
@@ -39,13 +43,19 @@ export const router = createBrowserRouter([
         element: <Profile></Profile>
       },
       {
+        path: '/bike-details/:id',
+        element: <BikeDetails />,
+        loader: ({ params }) => fetch(`http://localhost:5000/bike/${params._id}`)
+
+      },
+      {
         path: '/shop',
-        element:<Shop/>
+        element: <Shop />,
       },
       {
         path: '/bike-category/:category',
-        element:<CategoryByBike></CategoryByBike>,
-        loader: ({params}) => fetch(`http://localhost:5000/bike/${params.category}`)
+        element: <PrivateRoute><CategoryByBike></CategoryByBike>,</PrivateRoute>,
+        loader: ({ params }) => fetch(`http://localhost:5000/bike/${params.category}`)
       },
     ]
 
@@ -72,21 +82,28 @@ export const router = createBrowserRouter([
       {
         path: 'add-product',
         element: (
-          <PrivateRoute>
+
+          <SellerRoute>
             <AddProduct />
-          </PrivateRoute>
+          </SellerRoute>
+
         ),
       },
       {
         path: 'manage-product',
         element: (
-
-          <PrivateRoute>
-            <ManageBikes />
-          </PrivateRoute>
+          <SellerRoute>
+            <PrivateRoute>
+              <ManageBikes />
+            </PrivateRoute>
+          </SellerRoute>
 
         ),
       },
+      {
+        path: 'my-bookings',
+        element: <Booking/>
+      }
     ]
   }
 ])
