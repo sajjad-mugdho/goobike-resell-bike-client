@@ -65,8 +65,9 @@ const AddProduct = () => {
                 console.log(data);
                 toast.success("Bike Added")
                 form.rest()
-                setLoading(false)
+                
                 navigate("/dashboard/manage-product")
+               
             })
                 .catch(err => console.log(err))
 
@@ -137,11 +138,11 @@ const AddProduct = () => {
                             <select name='category' className="select select-secondary w-full ">
 
                                 <option className='hover:bg-primary' value="Sportsbike" >Sportsbike</option>
-                                <option value="Naked Bike">Naked Bike</option>
-                                <option value="Classic Bike">Classic Bike</option>
-                                <option value="Scooter Bike">Scooter Bike</option>
-                                <option value="Adventure Bike">Adventure Bike</option>
-                                <option value="Cruiser Bike">Cruiser Bike</option>
+                                <option value="Naked-Bike">Naked Bike</option>
+                                <option value="Classic-Bike">Classic Bike</option>
+                                <option value="Scooter-Bike">Scooter Bike</option>
+                                <option value="Adventure-Bike">Adventure Bike</option>
+                                <option value="Cruiser-Bike">Cruiser Bike</option>
 
                             </select>
                         </div>

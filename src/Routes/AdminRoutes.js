@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
-import { getRole } from '../../Api/Auth'
-import Spinner from '../../Component/Spinner/Spinner'
-import { AuthContext } from '../../Context/AuthProvider'
+import { getRole } from '../Api/Auth'
+import Spinner from '../Component/Spinner/Spinner'
+import { AuthContext } from '../Context/AuthProvider'
 
-
-
-
-const SellerRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext)
   const [role, setRole] = useState(null)
   const [roleLoading, setRoleLoading] = useState(true)
@@ -27,11 +24,10 @@ const SellerRoute = ({ children }) => {
     )
   }
 
-  if (user && user.uid && role === 'Seller') {
+  if (user && user.uid && role === 'admin') {
     return children
   }
   return <Navigate to='/dashboard' />
 }
 
-
-  export default SellerRoute;
+export default AdminRoute

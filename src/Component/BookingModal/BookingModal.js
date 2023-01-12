@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast, ToastBar } from 'react-hot-toast';
 
 import { AuthContext } from '../../Context/AuthProvider';
 
@@ -7,7 +7,7 @@ const BookingModal = ({ bikeCategory }) => {
 
     const { user } = useContext(AuthContext);
 
-    const { name, email, avater, bike_name, price, bikeimage, details, category, condition } = bikeCategory;
+    const {_id, name, email, avater, bike_name, price, bikeimage, details, category, condition } = bikeCategory;
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -46,12 +46,25 @@ const BookingModal = ({ bikeCategory }) => {
         }).then(res => res.json()).then(data => {
             console.log(data);
             if (data.acknowledged) {
-                
-                toast.success("Booking Confirmed")
-                
+                toast("Booked")
             }
             else {
                 toast.error(data.message);
+            }
+        })
+    }
+
+    const handleBooked = id => {
+        fetch(`http://localhost:5000/bikes/${id}`, {
+            method: "PUT",
+            headers: {
+                authorization: `bearar ${localStorage.getItem("accessToken")}`
+            }
+
+        }).then(res => res.json()).then(data => {
+            if (data.modifiedCount > 0) {
+                
+                toast.success("Booking Confirmed")
             }
         })
     }
@@ -83,7 +96,7 @@ const BookingModal = ({ bikeCategory }) => {
                         <label htmlFor="">Meeting Location:</label>
                         <input name='location' type="text" placeholder="Location" required className="input input-bordered w-full" />
 
-                        <input type="submit" className='btn btn-primary w-full  text-white' value="Confirm-Booking" />
+                        <input type="submit" onClick={() => handleBooked(_id)} className='btn btn-primary w-full  text-white' value="Confirm-Booking" />
 
                     </form>
                 </div>

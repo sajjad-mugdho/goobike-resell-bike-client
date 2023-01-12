@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import BookingModal from '../../../Component/BookingModal/BookingModal';
 
 const BikeCategory = ({ bikeCategory }) => {
-    const { name, email, avater, bike_name, price, bikeimage, details, category, condition } = bikeCategory;
+    const { name, email, status, avater, bike_name, price, bikeimage, details, category, condition } = bikeCategory;
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure><img src={bikeimage} alt="Shoes" /></figure>
@@ -13,16 +13,16 @@ const BikeCategory = ({ bikeCategory }) => {
                     <div className="w-12 rounded-full">
                         <img src={avater} alt="" />
                     </div>
-                    <div className="badge badge-secondary">{name}</div>
+                    <div className="badge badge-secondary">Name: {name}</div>
                 </h2>
                 <h2 className="card-title">
-                    {bike_name}
-                    <div className="badge badge-success">NEW</div>
+                    Bike: {bike_name}
+                    <div className="badge badge-info text-white">{status}</div>
                 </h2>
                 <p>{details.slice(0, 200)}...</p>
                 <div className="card-actions justify-end">
-                    <div className="badge badge-outline">Fashion</div>
-                    <div className="badge badge-outline">Products</div>
+                    <div className="badge badge-error">${price}</div>
+                    <div className="badge badge-accent text-white">Condition: {condition}</div>
                 </div>
                 <div className='flex my-5 justify-end'>
                     <label htmlFor="Booking-modal" className=" btn btn-primary  text-white">

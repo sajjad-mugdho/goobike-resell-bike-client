@@ -18,8 +18,10 @@ import Profile from "../../Pages/Shared/Profile";
 import Welcome from "../../Pages/Shared/Welcome";
 import CategoryByBike from "../../Pages/Shop/Categoreis/CategoryByBike";
 import Shop from "../../Pages/Shop/Shop";
+import AdminRoute from "../AdminRoutes";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoutes";
+
 
 
 export const router = createBrowserRouter([
@@ -85,38 +87,41 @@ export const router = createBrowserRouter([
       {
         path: 'add-product',
         element: (
-          <PrivateRoute><AddProduct /></PrivateRoute>
+          // <PrivateRoute><AddProduct /></PrivateRoute>
+          <SellerRoute><AddProduct /></SellerRoute>
         ),
       },
       {
         path: 'manage-product',
         element: (
 
-          <PrivateRoute>
+          <SellerRoute>
             <ManageBikes />
-          </PrivateRoute>
+          </SellerRoute>
+
 
 
         ),
       },
       {
         path: 'my-bookings',
-        element:<PrivateRoute>
-           <Booking />
+        element: <PrivateRoute>
+          <Booking />
         </PrivateRoute>
       },
-      
+
       {
         path: 'all-users',
-        element:<PrivateRoute>
-           <AllUsers/>
-        </PrivateRoute>
+        element: <AdminRoute>
+          <AllUsers />
+        </AdminRoute>
       },
       {
         path: 'all-products',
-        element:<PrivateRoute>
-           <AllProducts/>
-        </PrivateRoute>
+        element:
+          <AdminRoute>
+            <AllProducts />
+          </AdminRoute>
       },
     ]
   }
