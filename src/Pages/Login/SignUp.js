@@ -21,8 +21,8 @@ const SignUp = () => {
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
-        const role = "admin";
-        // const role = form.role.value;
+        // const role = "admin";
+        const role = form.role.value;
         const image = form.image.files[0]
         const password = form.password.value;
         console.log("Name:", name, "Email:", email, "Pass:", password, "Image:", image, "role:", role);
