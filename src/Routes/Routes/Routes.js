@@ -3,6 +3,10 @@ import BikeDetails from "../../Component/BikeDetails.js/BikeDetails";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import AddProduct from "../../Pages/Dashboard/AddProduct";
+
+import AllProducts from "../../Pages/Dashboard/AdminView/AllProducts";
+
+import AllUsers from "../../Pages/Dashboard/AdminView/AllUsers";
 import Booking from "../../Pages/Dashboard/Booking";
 import ManageBikes from "../../Pages/Dashboard/ManageBikes";
 
@@ -100,7 +104,20 @@ export const router = createBrowserRouter([
         element:<PrivateRoute>
            <Booking />
         </PrivateRoute>
-      }
+      },
+      
+      {
+        path: 'all-users',
+        element:<PrivateRoute>
+           <AllUsers/>
+        </PrivateRoute>
+      },
+      {
+        path: 'all-products',
+        element:<PrivateRoute>
+           <AllProducts/>
+        </PrivateRoute>
+      },
     ]
   }
 ])
