@@ -11,7 +11,7 @@ import Sellermenu from './Sellermenu';
 const Sidebar = () => {
     const { user, logout } = useContext(AuthContext)
     const [isActive, setActive] = useState('false')
-    const url = `http://localhost:5000/user/${user?.email}`
+    const url = `https://goobike-assigenment-12-server.vercel.app/user/${user?.email}`
 
     const { data } = useQuery({
         queryKey: ["user"],

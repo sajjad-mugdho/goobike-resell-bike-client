@@ -6,7 +6,7 @@ import BookingModal from '../../../Component/BookingModal/BookingModal';
 const Categores = () => {
 
     const { user, loading } = useContext(AuthContext);
-    const url = `http://localhost:5000/bikes/${user?.email}`;
+    const url = `https://goobike-assigenment-12-server.vercel.app/bikes/${user?.email}`;
 
     const { data = [] } = useQuery({
         queryKey: ['bikes',  user?.email],

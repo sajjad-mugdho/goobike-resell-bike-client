@@ -10,7 +10,7 @@ const Shop = () => {
 
     const { user, loading } = useContext(AuthContext);
     
-    const url = `http://localhost:5000/bikes?email=${user?.email}`;
+    const url = `https://goobike-assigenment-12-server.vercel.app/bikes?email=${user?.email}`;
 
     const { data: bikes = [] } = useQuery({
         queryKey: ['bikes'],

@@ -6,7 +6,7 @@ const AllUsers = () => {
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/users', {
+                const res = await fetch('https://goobike-assigenment-12-server.vercel.app/users', {
                     method: "GET",
                     headers: {
                         authorization: `bearer ${localStorage.getItem('gooBike-token')}`

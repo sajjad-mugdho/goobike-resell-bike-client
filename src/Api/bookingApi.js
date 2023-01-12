@@ -1,5 +1,5 @@
 export const bookingData = async bookingItem => {
-    const response = await fetch(`http://localhost:5000/bookings`, {
+    const response = await fetch(`https://goobike-assigenment-12-server.vercel.app/bookings`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',

@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
       {
         path: '/bike-details/:id',
         element: <BikeDetails />,
-        loader: ({ params }) => fetch(`http://localhost:5000/bike/${params._id}`)
+        loader: ({ params }) => fetch(`https://goobike-assigenment-12-server.vercel.app/bike/${params._id}`)
 
       },
       {
@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
       {
         path: '/bike-category/:category',
         element: <PrivateRoute><CategoryByBike></CategoryByBike>,</PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/bike/${params.category}`)
+        loader: ({ params }) => fetch(`https://goobike-assigenment-12-server.vercel.app/bike/${params.category}`)
       },
     ]
 

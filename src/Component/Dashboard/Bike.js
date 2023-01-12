@@ -6,7 +6,7 @@ const Bike = ({bike, reftch}) => {
     const {_id, name, email, avater, bike_name, price, bikeimage, details, category, condition } = bike;
 
     const handleDelete = (doctor) => {
-        fetch(`http://localhost:5000/bike/${_id}`, {
+        fetch(`https://goobike-assigenment-12-server.vercel.app/bike/${_id}`, {
             method: "DELETE",
             headers: {
                 "content-type" : "application-json"

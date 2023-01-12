@@ -4,7 +4,7 @@ export const setAuthToken = user => {
     }
   
     //   Save user in db & get token
-    fetch(`http://localhost:5000/user/${user?.email}`, {
+    fetch(`https://goobike-assigenment-12-server.vercel.app/user/${user?.email}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -23,7 +23,7 @@ export const setAuthToken = user => {
 
   export const getRole = async email => {
     const response = await fetch(
-      `http://localhost:5000/user/${email}`,
+      `https://goobike-assigenment-12-server.vercel.app/user/${email}`,
       {
         method: 'GET',
         headers: {

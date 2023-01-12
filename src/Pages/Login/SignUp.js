@@ -96,7 +96,7 @@ const SignUp = () => {
     }
 
     const saveUser = async userData => {
-        const url = `http://localhost:5000/user/${userData?.email}`
+        const url = `https://goobike-assigenment-12-server.vercel.app/user/${userData?.email}`
 
         const response = await fetch(url, {
             method: 'PUT',

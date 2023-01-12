@@ -75,7 +75,7 @@ const AddProduct = () => {
         })
 
         const saveBike = async sellerData => {
-            const url = `http://localhost:5000/bikes`
+            const url = `https://goobike-assigenment-12-server.vercel.app/bikes`
             const res = await fetch(url, {
                 method: "POST",
                 headers: {
