@@ -11,7 +11,7 @@ const ManageBikes = () => {
     const { user, loading } = useContext(AuthContext);
     const url = `http://localhost:5000/bikes/${user?.email}`;
 
-    const { data: bikes = [] } = useQuery({
+    const { data: bikes = [], refetch } = useQuery({
         queryKey: ['bikes',  user?.email],
         queryFn: async () => {
             const res = await fetch(url);
@@ -35,7 +35,7 @@ const ManageBikes = () => {
     return (
         <div className='my-5 ml-5 gap-5 grid md:grid-cols-1 lg:grid-cols-2' >
             {
-                bikes?.map(bike => <Bike key={bike.id} bike={bike} />)
+                bikes?.map(bike => <Bike key={bike._id} refetch={refetch} bike={bike} />)
             }
         </div>
     );

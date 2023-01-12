@@ -81,27 +81,25 @@ export const router = createBrowserRouter([
       {
         path: 'add-product',
         element: (
-
-          <SellerRoute>
-            <AddProduct />
-          </SellerRoute>
-
+          <PrivateRoute><AddProduct /></PrivateRoute>
         ),
       },
       {
         path: 'manage-product',
         element: (
-          <SellerRoute>
-            <PrivateRoute>
-              <ManageBikes />
-            </PrivateRoute>
-          </SellerRoute>
+
+          <PrivateRoute>
+            <ManageBikes />
+          </PrivateRoute>
+
 
         ),
       },
       {
         path: 'my-bookings',
-        element: <Booking />
+        element:<PrivateRoute>
+           <Booking />
+        </PrivateRoute>
       }
     ]
   }

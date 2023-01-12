@@ -1,7 +1,26 @@
 import React from 'react';
+import { toast } from 'react-hot-toast';
 
-const Bike = ({bike}) => {
-    const {name, email, avater, bike_name, price, bikeimage, details, category, condition } = bike;
+const Bike = ({bike, reftch}) => {
+
+    const {_id, name, email, avater, bike_name, price, bikeimage, details, category, condition } = bike;
+
+    const handleDelete = (doctor) => {
+        fetch(`http://localhost:5000/bike/${_id}`, {
+            method: "DELETE",
+            headers: {
+                "content-type" : "application-json"
+                // authorization: `bearar ${localStorage.getItem('')}`
+            }
+        }).then(res => res.json()).then(data => {
+            console.log(data);
+            if(data.deletedCount > 0){
+                toast.success(`Delete ${bike_name} Successfuly`)
+                reftch()
+            }
+            
+        })
+    }
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
             <figure><img src={bikeimage} alt="Shoes" /></figure>
@@ -19,7 +38,7 @@ const Bike = ({bike}) => {
                     <button className='btn btn-sm btn-primary text-white'>
                         Mark For AD
                     </button>
-                    <button className='btn  btn-sm bg-red-500  text-white'>
+                    <button onClick={handleDelete} className='btn  btn-sm bg-red-500  text-white'>
                         Delete
                     </button>
                     
