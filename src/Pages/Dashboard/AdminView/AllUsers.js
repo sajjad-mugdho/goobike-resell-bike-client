@@ -54,9 +54,9 @@ const AllUsers = () => {
                                     <td>{user.email}</td>
                                     <td>{user.role}</td>
                                     <td>
-                                    <label htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Make Admin</label>
-                                    <label htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Delete</label>
+                                    <label htmlFor="confirmation-modal" className="btn btn-sm btn-primary text-white">Make Admin</label>
                                     </td>
+                                    <td><label htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Delete</label></td>
                                 </tr>
                             )
                         }
