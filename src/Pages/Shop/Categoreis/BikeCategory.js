@@ -25,10 +25,19 @@ const BikeCategory = ({ bikeCategory }) => {
                     <div className="badge badge-accent text-white">Condition: {condition}</div>
                 </div>
                 <div className='flex my-5 justify-end'>
-                    <label htmlFor="Booking-modal" className=" btn btn-primary  text-white">
-                        <ArrowRightIcon className='w-5 h-5'></ArrowRightIcon>
-                        <span className='mx-4 font-medium'>Book Now</span>
-                    </label>
+                    {
+                        status === "Booked" ? 
+                        <button disabled className='btn btn-primary'>
+                            <ArrowRightIcon className='w-5 h-5'></ArrowRightIcon>
+                            <span className='mx-4 font-medium'>Booked</span>
+                        </button>
+                            :
+
+                            <label htmlFor="Booking-modal" className=" btn btn-primary  text-white">
+                                <ArrowRightIcon className='w-5 h-5'></ArrowRightIcon>
+                                <span className='mx-4 font-medium'>Book Now</span>
+                            </label>
+                    }
                 </div>
                 <BookingModal bikeCategory={bikeCategory}></BookingModal>
             </div>

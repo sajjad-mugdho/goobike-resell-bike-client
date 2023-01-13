@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { toast, ToastBar } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 import { AuthContext } from '../../Context/AuthProvider';
 
@@ -7,7 +7,7 @@ const BookingModal = ({ bikeCategory }) => {
 
     const { user } = useContext(AuthContext);
 
-    const {_id, name, email, avater, bike_name, price, bikeimage, details, category, condition } = bikeCategory;
+    const { _id, name, email, avater, status, bike_name, price, bikeimage, details, category, condition } = bikeCategory;
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -46,7 +46,7 @@ const BookingModal = ({ bikeCategory }) => {
         }).then(res => res.json()).then(data => {
             console.log(data);
             if (data.acknowledged) {
-                toast("Booked")
+                console.log(data);
             }
             else {
                 toast.error(data.message);
@@ -55,16 +55,17 @@ const BookingModal = ({ bikeCategory }) => {
     }
 
     const handleBooked = id => {
-        fetch(`http://localhost:5000/bikes/${id}`, {
+        fetch(`http://localhost:5000/bike/${id}`, {
             method: "PUT",
             headers: {
-                authorization: `bearar ${localStorage.getItem("accessToken")}`
+                "content-type": "application/json"
+
             }
 
         }).then(res => res.json()).then(data => {
             if (data.modifiedCount > 0) {
-                
-                toast.success("Booking Confirmed")
+                toast.success("Booked Successfully");
+
             }
         })
     }
@@ -97,6 +98,7 @@ const BookingModal = ({ bikeCategory }) => {
                         <input name='location' type="text" placeholder="Location" required className="input input-bordered w-full" />
 
                         <input type="submit" onClick={() => handleBooked(_id)} className='btn btn-primary w-full  text-white' value="Confirm-Booking" />
+
 
                     </form>
                 </div>

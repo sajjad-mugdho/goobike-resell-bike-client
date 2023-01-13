@@ -10,7 +10,7 @@ const AllUsers = () => {
                 const res = await fetch('https://goobike-assigenment-12-server.vercel.app/users', {
                     method: "GET",
                     headers: {
-                        authorization: `bearer ${localStorage.getItem('gooBike-token')}`
+                        "content-type": "application/json"
                     }
 
                 });
@@ -25,7 +25,7 @@ const AllUsers = () => {
 
 
     const handleMakeAdmin = id => {
-        fetch(`http://localhost:5000/users/admin/${id}`, {
+        fetch(`https://goobike-assigenment-12-server.vercel.app/users/admin/${id}`, {
             method: "PUT",
             headers: {
                 authorization: `bearar ${localStorage.getItem("accessToken")}`
@@ -73,7 +73,7 @@ const AllUsers = () => {
                                     <td>{user.role}</td>
                                     <td>
                                         {
-                                            user.role === "admin" ? "" : <label onClick={()=> handleMakeAdmin(user._id) } htmlFor="confirmation-modal" className="btn btn-sm btn-primary text-white">Make Admin</label>
+                                            user.role === "admin" ? "" : <label onClick={() => handleMakeAdmin(user._id)} htmlFor="confirmation-modal" className="btn btn-sm btn-primary text-white">Make Admin</label>
                                         }
                                     </td>
                                     <td><label htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Delete</label></td>

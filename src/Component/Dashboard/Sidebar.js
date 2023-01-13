@@ -23,7 +23,7 @@ const Sidebar = () => {
         }
     })
 
-    console.log("user:", data);
+    
 
     // Sidebar Responsive Handler
     const handleToggle = () => {

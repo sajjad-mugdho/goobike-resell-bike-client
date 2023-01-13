@@ -11,3 +11,6 @@ export const bookingData = async bookingItem => {
       const data = await response.json()
       return data
     }
+
+    
+    

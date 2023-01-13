@@ -1,6 +1,6 @@
 export const getRole = async email => {
     const response = await fetch(
-      `http://localhost:5000//user/${email}`,
+      `https://goobike-assigenment-12-server.vercel.app//user/${email}`,
       {
         method: 'GET',
         headers: {

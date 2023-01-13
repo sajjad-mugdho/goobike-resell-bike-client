@@ -9,10 +9,10 @@ import ShopCard from './ShopCard';
 const Shop = () => {
 
     const { user, loading } = useContext(AuthContext);
-    
+
     const url = `https://goobike-assigenment-12-server.vercel.app/bikes?email=${user?.email}`;
 
-    const { data: bikes = [] } = useQuery({
+    const { data: bikes = [], refetch} = useQuery({
         queryKey: ['bikes'],
         queryFn: async () => {
             const res = await fetch(url,);
@@ -34,7 +34,7 @@ const Shop = () => {
             </div>
             <div className='my-5 mx-5 gap-10 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3' >
                 {
-                    bikes.map(bike => <ShopCard key={bike._id} bike={bike} />)
+                    bikes.map(bikeCategory => <ShopCard key={bikeCategory._id} refetch={refetch} bikeCategory={bikeCategory} />)
                 }
             </div>
         </>
