@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
-import PrimaryBtn from '../PrimeryBtn/PrimaryBtn';
+
 import AdminMenu from './AdminMenu';
 import BuyerMenu from './BuyerMenu';
 import Sellermenu from './Sellermenu';

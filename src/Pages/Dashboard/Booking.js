@@ -1,6 +1,7 @@
 import { async } from '@firebase/util';
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Spinner from '../../Component/Spinner/Spinner';
 import { AuthContext } from '../../Context/AuthProvider';
 
@@ -68,7 +69,7 @@ const Booking = () => {
                                     </td>
                                     <td>{booking?.bookedItem?.name}</td>
                                     <td>
-                                        <button className='btn btn-sm text-white btn-primary'>Pay!</button>
+                                        <Link to={`/dashboard/payment/${booking._id}`}><button  className='btn btn-sm text-white btn-primary'>Pay!</button></Link>
                                     </td>
                                 </tr>)
                         }

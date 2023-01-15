@@ -9,6 +9,7 @@ import AllProducts from "../../Pages/Dashboard/AdminView/AllProducts";
 import AllUsers from "../../Pages/Dashboard/AdminView/AllUsers";
 import Booking from "../../Pages/Dashboard/Booking";
 import ManageBikes from "../../Pages/Dashboard/ManageBikes";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 
 import Home from "../../Pages/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -122,6 +123,12 @@ export const router = createBrowserRouter([
           <AdminRoute>
             <AllProducts />
           </AdminRoute>
+      },
+      {
+        path: '/dashboard/payment/:id',
+        element:
+          <PrivateRoute><Payment/></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/booking/${params.id}`)
       },
     ]
   }
