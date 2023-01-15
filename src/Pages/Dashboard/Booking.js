@@ -48,6 +48,7 @@ const Booking = () => {
                             <th>Image</th>
                             <th>Bike</th>
                             <th>Seller Name</th>
+                            <th>TnxID</th>
                             <th>Paid</th>
                         </tr>
                     </thead>
@@ -67,9 +68,16 @@ const Booking = () => {
                                         <div className="font-bold">{booking?.bookedItem?.bike_name}</div>
                                         <div className="text-sm rounded-full  px-2 text-white w-12 badge-info">${booking?.bookedItem?.price}</div>
                                     </td>
+
                                     <td>{booking?.bookedItem?.name}</td>
+                                    <td className='text-green-600'>{booking.transactionId}</td>
                                     <td>
-                                        <Link to={`/dashboard/payment/${booking._id}`}><button  className='btn btn-sm text-white btn-primary'>Pay!</button></Link>
+                                       {
+                                        booking.itemPrice && !booking.paid  && <Link to={`/dashboard/payment/${booking._id}`}><button  className='btn btn-sm text-white btn-primary'>Pay!</button></Link>
+                                       }
+                                       {
+                                        booking.itemPrice && booking.paid && <span className='text-xl font-bold text-green-500'>Paid</span>
+                                       }
                                     </td>
                                 </tr>)
                         }
